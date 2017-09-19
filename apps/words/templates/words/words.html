@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Session Words Assignment</title>
+    <style>
+    .red{
+        color: red;
+    }
+    .blue{
+        color: blue;
+    }
+    .green{
+        color: blue;
+    }
+    .big{
+        font-size: 40px;
+    }
+    .normal{
+        font-size: 20px;
+    }
+    .tiney{
+        font-size:7px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class = 'container'>
+      <form action="/session_words/process" method='post'>
+        {% csrf_token %}
+        <h2>Add A New Word</h2>
+        <input type="text" name='word'>
+        <h5>Choose a color:</h5>
+        <input type="radio" id="red" name="color" value="red">
+        <label for="red">red</label>
+        <input type="radio" id="blue" name="color" value="blue">
+        <label for="blue">blue</label>
+        <input type="radio" id="green" name="color" value="green">
+        <label for="green">green</label>
+        <h5>Pick a size:</h5>
+        <input type="radio" id="big" name="size" value="big">
+        <label for="BIG">BIG</label>
+        <input type="radio" id="normal" name="size" value="normal">
+        <label for="normal">normal</label>
+        <input type="radio" id="tiny" name="size" value="tiny">
+        <label for="tiny">tiny</label>
+        <input type="submit" name="add" value="Add to Session">
+      </form>
+      <form action="/session_words/reset" method='post'>
+        {% csrf_token %}
+        <input type="submit" name="Reset" value="Reset">
+      </form>
+    </div>
+    <div class = 'container'>
+        {%for entry in entries%}
+            <div class = '{{entry.color}} {{entry.size}}'>
+                {{entry.words}}
+            </div>
+        {%endfor%}
+    </div>
+  </body>
+</html>
